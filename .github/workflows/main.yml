@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, 16core-32gb, ubuntu-focal, amd64]
+    runs-on: [ubuntu-latest, amd64]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
