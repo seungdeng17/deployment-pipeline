@@ -37,4 +37,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: your-dockerhub-username/deployment-pipeline:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/deployment-pipeline:latest
