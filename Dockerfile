@@ -1,15 +1,12 @@
-FROM node:14-alpine
+FROM node:16-alpine
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /app
-
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-COPY . .
-
-COPY --from=build /app/.next .next
-
-RUN yarn add next
+COPY ./next.config.js /usr/src/app/next.config.js
+COPY ./public /usr/src/app/public
+COPY ./.next /usr/src/app/.next
+COPY ./node_modules /usr/src/app/node_modules
+COPY ./package.json /usr/src/app/package.json
 
 EXPOSE 3000
 
