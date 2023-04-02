@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-pipeline
+  template:
+    metadata:
+      labels:
+        app: deployment-pipeline
+    spec:
+      containers:
+        - name: deployment-pipeline
+          image: seungdeng17/deployment-pipeline:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-pipeline
+spec:
+  selector:
+    app: deployment-pipeline
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
